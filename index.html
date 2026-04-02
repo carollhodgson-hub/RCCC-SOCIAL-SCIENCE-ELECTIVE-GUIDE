@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Sciences Course Catalog</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6fb;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.code {
+    font-weight: bold;
+    color: #555;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.details {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Social Sciences Course Catalog</h1>
+<p>Click a course to view details</p>
+</header>
+
+<div class="container">
+
+<!-- COURSE TEMPLATE START -->
+
+<div class="card" onclick="toggle(this)">
+<div class="code">ANT-210</div>
+<div class="title">General Anthropology</div>
+
+<div class="details">
+<div class="section-title">Description:</div>
+Introduces human origins, culture, language, and biological variation across societies.
+
+<div class="section-title">Semesters & Format:</div>
+FA, SP (IN)
+
+<div class="section-title">Prerequisites:</div>
+None
+
+<div class="section-title">Benefits:</div>
+Builds understanding of human diversity and strengthens critical thinking for careers in healthcare, education, and global studies.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<div class="code">PSY-215</div>
+<div class="title">Positive Psychology</div>
+
+<div class="details">
+<div class="section-title">Description:</div>
+Focuses on human strengths, happiness, resilience, and emotional intelligence.
+
+<div class="section-title">Semesters & Format:</div>
+FA, SP (BL)
+
+<div class="section-title">Prerequisites:</div>
+PSY-150
+
+<div class="section-title">Benefits:</div>
+Helps students develop resilience, emotional intelligence, and life skills for success in school and careers.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<div class="code">SOC-220</div>
+<div class="title">Social Problems</div>
+
+<div class="details">
+<div class="section-title">Description:</div>
+Examines major social issues and explores solutions to problems affecting society.
+
+<div class="section-title">Semesters & Format:</div>
+FA (IN)
+
+<div class="section-title">Prerequisites:</div>
+None
+
+<div class="section-title">Benefits:</div>
+Builds critical thinking and prepares students for careers in law, public policy, and social work.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<div class="code">SOC-245</div>
+<div class="title">Drugs and Society</div>
+
+<div class="details">
+<div class="section-title">Description:</div>
+Explores the social impact of drug use and how society responds to substance use.
+
+<div class="section-title">Semesters & Format:</div>
+SP (BL, IN)
+
+<div class="section-title">Prerequisites:</div>
+SOC-210
+
+<div class="section-title">Benefits:</div>
+Builds awareness of public health issues and helps students make informed decisions while preparing for healthcare and policy careers.
+</div>
+</div>
+
+<!-- COURSE TEMPLATE END -->
+
+</div>
+
+<script>
+function toggle(card) {
+    let details = card.querySelector(".details");
+    details.style.display = details.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
