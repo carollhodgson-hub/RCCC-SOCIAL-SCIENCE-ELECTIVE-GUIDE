@@ -1,395 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Social Sciences Course Catalog</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elective Course Catalog</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f4f6fb;
-}
-
-header {
-    background: #2c3e50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.03);
-}
-
-.code {
-    font-weight: bold;
-    color: #555;
-}
-
-.title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.details {
-    display: none;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.section-title {
-    font-weight: bold;
-    margin-top: 10px;
-}
+:root{--navy:#17365d;--gold:#d8bc62;--bg:#f5f7fb;--card:#fff;--text:#203040;--muted:#5a6a7a;--border:#d7dfeb;--shadow:0 10px 28px rgba(23,54,93,.10);}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#eef3fa 0,#f8fafc 220px,#f5f7fb 100%);color:var(--text)}
+header{padding:36px 20px 20px;background:linear-gradient(135deg,var(--navy),#264f81);color:#fff}
+header .wrap{max-width:1200px;margin:0 auto}
+h1{margin:0 0 8px;font-size:clamp(1.8rem,3vw,2.8rem)}
+.sub{max-width:850px;line-height:1.55;font-size:1rem;color:#eef4ff}
+main{max-width:1200px;margin:0 auto;padding:22px 18px 38px}
+.toolbar{display:grid;grid-template-columns:1.2fr .9fr .9fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow);position:sticky;top:12px;z-index:10}
+input,select,button{font:inherit;border-radius:12px;border:1px solid #cbd5e1;padding:12px 14px;background:#fff;color:var(--text)}
+button{background:var(--navy);color:#fff;border:none;cursor:pointer}
+button:hover{filter:brightness(1.05)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 10px}
+.pill{background:#fff;border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-size:.92rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-height:210px;cursor:pointer;transition:.18s transform,.18s box-shadow}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(23,54,93,.14)}
+.badge{display:inline-block;align-self:flex-start;padding:6px 10px;border-radius:999px;background:#e9f0fb;color:var(--navy);font-size:.82rem;font-weight:700;letter-spacing:.02em}
+.hist .badge{background:#f6ecd3}
+.psy .badge{background:#e6f2ea}
+.soc .badge{background:#efe8f8}
+.title{font-size:1.15rem;font-weight:700;line-height:1.25}
+.meta{font-size:.92rem;color:var(--muted);line-height:1.55}
+.tease{font-size:.95rem;line-height:1.55;color:#334155}
+.empty{padding:28px;background:#fff;border:1px dashed #c8d2e0;border-radius:18px;text-align:center;color:var(--muted)}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.52);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal{background:#fff;max-width:840px;width:min(840px,100%);max-height:90vh;overflow:auto;border-radius:24px;border:1px solid var(--border);box-shadow:0 24px 50px rgba(15,23,42,.25)}
+.modal-head{padding:22px 24px;background:linear-gradient(135deg,var(--navy),#264f81);color:#fff;position:sticky;top:0}
+.modal-head h2{margin:0 0 6px;font-size:1.6rem}
+.modal-body{padding:22px 24px 24px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.info{background:#f8fafc;border:1px solid var(--border);border-radius:16px;padding:14px}
+.info h3{margin:0 0 6px;font-size:.85rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.info p{margin:0;line-height:1.55;color:#334155}
+.section-title{margin:18px 0 6px;font-size:1rem;color:var(--navy)}
+.desc,.benefit{line-height:1.68;color:#243447}
+.close{position:absolute;right:16px;top:14px;background:#ffffff22;border:1px solid #ffffff55;padding:9px 12px}
+.footer-note{margin-top:18px;color:var(--muted);font-size:.9rem}
+@media (max-width:800px){.toolbar{grid-template-columns:1fr} .close{position:static;margin-top:10px}}
 </style>
 </head>
-
 <body>
-
-<header>
-<h1>Social Sciences Course Catalog</h1>
-<p>Click a course to view details</p>
-</header>
-
-<div class="container">
-
-<!-- ================= ALL COURSES ================= -->
-
-<div class="card" onclick="toggle(this)">
-<div class="code">ANT-210</div>
-<div class="title">General Anthropology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Introduces human origins, culture, language, and biological variation.
-<div class="section-title">Semesters:</div> FA, SP (IN)
-<div class="section-title">Benefits:</div>
-Builds understanding of human diversity and critical thinking for global careers.
+<header><div class="wrap"><h1>Elective Course Catalog</h1><div class="sub">Click any course card to view the full course description, semesters and formats offered, state prerequisites, and benefits to high school and college students.</div></div></header>
+<main>
+<div class="toolbar">
+  <input id="search" type="text" placeholder="Search by course code, title, or keyword">
+  <select id="discipline"><option value="All">All disciplines</option><option>Anthropology</option><option>History</option><option>Psychology</option><option>Sociology</option></select>
+  <select id="format"><option value="All">All formats</option><option value="IN">In Person (IN)</option><option value="BL">Blended (BL)</option><option value="HF">HyFlex (HF)</option><option value="SU">Summer (SU)</option></select>
+  <button id="reset" type="button">Reset</button>
 </div>
+<div class="stats" id="stats"></div>
+<div id="grid" class="grid"></div>
+<div id="empty" class="empty" hidden>No courses match the current search. Try clearing a filter or using a broader keyword.</div>
+<div class="footer-note">This file is ready for GitHub Pages, Blackboard web hosting, or a local browser preview.</div>
+</main>
+<div id="overlay" class="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><button class="close" id="closeBtn" type="button">Close</button><h2 id="modalTitle"></h2><div id="modalSub"></div></div>
+    <div class="modal-body">
+      <div class="info-grid">
+        <div class="info"><h3>Semesters & Formats</h3><p id="modalSem"></p></div>
+        <div class="info"><h3>State Prerequisites</h3><p id="modalPre"></p></div>
+        <div class="info"><h3>Discipline</h3><p id="modalDisc"></p></div>
+      </div>
+      <h3 class="section-title">NC State Course Description</h3>
+      <div class="desc" id="modalDesc"></div>
+      <h3 class="section-title">Benefits to High School & College Students</h3>
+      <div class="benefit" id="modalBenefit"></div>
+    </div>
+  </div>
 </div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">ANT-220</div>
-<div class="title">Cultural Anthropology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Explores cultural systems, fieldwork, and cross-cultural comparisons.
-<div class="section-title">Semesters:</div> (IN)
-<div class="section-title">Benefits:</div>
-Develops cultural awareness for diverse workplaces and global careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">HIS-221</div>
-<div class="title">African-American History</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Covers African-American history from colonial times to today.
-<div class="section-title">Semesters:</div> FA, SP (IN)
-<div class="section-title">Prereq:</div> ENG-111
-<div class="section-title">Benefits:</div>
-Strengthens critical thinking and understanding of inequality and social change.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">HIS-226</div>
-<div class="title">The Civil War</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Examines causes, events, and impacts of the Civil War.
-<div class="section-title">Semesters:</div> (BL)
-<div class="section-title">Prereq:</div> ENG-111
-<div class="section-title">Benefits:</div>
-Builds analytical skills and understanding of political conflict.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">HIS-236</div>
-<div class="title">North Carolina History</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Focuses on the historical development of North Carolina.
-<div class="section-title">Semesters:</div> (BL)
-<div class="section-title">Prereq:</div> ENG-111
-<div class="section-title">Benefits:</div>
-Enhances civic awareness and local historical knowledge.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-215</div>
-<div class="title">Positive Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies resilience, happiness, and emotional intelligence.
-<div class="section-title">Semesters:</div> FA, SP (BL)
-<div class="section-title">Prereq:</div> PSY-150
-<div class="section-title">Benefits:</div>
-Improves well-being and life success skills.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-211</div>
-<div class="title">Psychology of Adjustment</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Focuses on coping, relationships, and personal growth.
-<div class="section-title">Semesters:</div> FA, SU, SP (IN)
-<div class="section-title">Prereq:</div> PSY-150
-<div class="section-title">Benefits:</div>
-Builds stress management and decision-making skills.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-231</div>
-<div class="title">Forensic Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Links psychology with the legal system.
-<div class="section-title">Semesters:</div> FA, SP (IN)
-<div class="section-title">Prereq:</div> PSY-150
-<div class="section-title">Benefits:</div>
-Prepares students for law and criminal justice careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-237</div>
-<div class="title">Social Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies social influence and group behavior.
-<div class="section-title">Semesters:</div> FA, SP (IN)
-<div class="section-title">Prereq:</div> PSY-150 or SOC-210
-<div class="section-title">Benefits:</div>
-Strengthens communication and teamwork skills.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-239</div>
-<div class="title">Psychology of Personality</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Explores personality theories and traits.
-<div class="section-title">Semesters:</div> FA, SU, SP (IN)
-<div class="section-title">Prereq:</div> PSY-150
-<div class="section-title">Benefits:</div>
-Helps understand behavior and individual differences.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-241</div>
-<div class="title">Developmental Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Covers human development across the lifespan.
-<div class="section-title">Semesters:</div> FA, SU, SP
-<div class="section-title">Benefits:</div>
-Prepares students for healthcare and education careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-246</div>
-<div class="title">Adolescent Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Focuses on teen development and challenges.
-<div class="section-title">Semesters:</div> SP (IN)
-<div class="section-title">Benefits:</div>
-Great for future educators and youth professionals.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-249</div>
-<div class="title">Psychology of Aging</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies aging and life transitions.
-<div class="section-title">Semesters:</div> FA (IN)
-<div class="section-title">Benefits:</div>
-Prepares students for healthcare and social services.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-259</div>
-<div class="title">Human Sexuality</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Explores human sexuality from multiple perspectives.
-<div class="section-title">Semesters:</div> FA, SP (IN)
-<div class="section-title">Benefits:</div>
-Supports informed decision-making and health awareness.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-265</div>
-<div class="title">Behavioral Modification</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Applies behavior-change techniques.
-<div class="section-title">Semesters:</div> SP (HF)
-<div class="section-title">Benefits:</div>
-Useful for teaching, coaching, and leadership.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-275</div>
-<div class="title">Health Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Links mental and physical health.
-<div class="section-title">Semesters:</div> (IN, BL)
-<div class="section-title">Benefits:</div>
-Promotes healthy lifestyles and wellness careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">PSY-281</div>
-<div class="title">Abnormal Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies psychological disorders and treatments.
-<div class="section-title">Semesters:</div> FA, SU, SP
-<div class="section-title">Benefits:</div>
-Foundation for mental health and counseling careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-213</div>
-<div class="title">Sociology of the Family</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Examines family structures and relationships.
-<div class="section-title">Semesters:</div> FA, SU, SP
-<div class="section-title">Benefits:</div>
-Helps understand real-life family dynamics.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-220</div>
-<div class="title">Social Problems</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Analyzes major social issues.
-<div class="section-title">Semesters:</div> FA (IN)
-<div class="section-title">Benefits:</div>
-Prepares students for policy and social work careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-225</div>
-<div class="title">Social Diversity</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies diversity and inequality.
-<div class="section-title">Semesters:</div> FA, SU, SP
-<div class="section-title">Benefits:</div>
-Builds cultural competence and awareness.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-230</div>
-<div class="title">Race and Ethnic Relations</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Explores race, ethnicity, and inequality.
-<div class="section-title">Semesters:</div> SU (IN)
-<div class="section-title">Benefits:</div>
-Prepares students for advocacy and leadership roles.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-234</div>
-<div class="title">Sociology of Gender</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Examines gender roles and social change.
-<div class="section-title">Semesters:</div> FA (IN)
-<div class="section-title">Benefits:</div>
-Builds awareness for education and HR careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-240</div>
-<div class="title">Social Psychology</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Explores group behavior and social influence.
-<div class="section-title">Semesters:</div> SP (IN)
-<div class="section-title">Benefits:</div>
-Strengthens interpersonal skills.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-242</div>
-<div class="title">Sociology of Deviance</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Studies deviance, crime, and social control.
-<div class="section-title">Semesters:</div> (IN, BL)
-<div class="section-title">Benefits:</div>
-Great for criminal justice and law careers.
-</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<div class="code">SOC-245</div>
-<div class="title">Drugs and Society</div>
-<div class="details">
-<div class="section-title">Description:</div>
-Examines drug use and social impact.
-<div class="section-title">Semesters:</div> SP (BL, IN)
-<div class="section-title">Prereq:</div> SOC-210
-<div class="section-title">Benefits:</div>
-Prepares students for healthcare, policy, and counseling careers.
-</div>
-</div>
-
-</div>
-
 <script>
-function toggle(card) {
-    let details = card.querySelector(".details");
-    details.style.display = details.style.display === "block" ? "none" : "block";
+const courses = [{"code": "ANT-210", "title": "General Anthropology", "desc": "This course introduces the physical, archaeological, linguistic, and ethnological fields of anthropology. Topics include human origins, genetic variations, archaeology, linguistics, primatology, and contemporary cultures. Upon completion, students should be able to demonstrate an understanding of the four major fields of anthropology.", "sem": "FA, SP (IN)", "pre": "None listed", "benefit": "Builds a broad understanding of human diversity and origins while strengthening critical thinking and scientific reasoning. Great for students interested in healthcare, education, social sciences, and global careers.", "disc": "Anthropology"}, {"code": "ANT-220", "title": "Cultural Anthropology", "desc": "This course introduces the nature of human culture. Emphasis is placed on cultural theory, methods of fieldwork, and cross-cultural comparisons in the areas of ethnology, language, and the cultural past. Upon completion, students should be able to demonstrate an understanding of basic cultural processes and how cultural data are collected and analyzed.", "sem": "(IN)", "pre": "None listed", "benefit": "Develops cultural awareness and global perspective. Helps students better understand diverse populations - valuable for teaching, healthcare, business, and working in multicultural environments.", "disc": "Anthropology"}, {"code": "HIS-221", "title": "African-American History", "desc": "This course covers African-American history from the Colonial period to the present. Topics include African origins, the slave trade, the Civil War, Reconstruction, the Jim Crow era, the civil rights movement, and contributions of African Americans. Upon completion, students should be able to analyze significant political, socioeconomic, and cultural developments in the history of African Americans.", "sem": "FA, SP (IN)", "pre": "Take ENG-111", "benefit": "Enhances understanding of historical inequality, resilience, and cultural contributions. Strengthens critical thinking and prepares students for careers in education, law, public service, and social advocacy.", "disc": "History"}, {"code": "HIS-226", "title": "The Civil War", "desc": "This course examines the social, political, economic, and ideological forces that led to the Civil War and Reconstruction. Topics include regional conflicts and sectionalism, dissolution of the Union, military campaigns, and the War's socioeconomic impact, aftermath, and consequences. Upon completion, students should be able to analyze significant political, socioeconomic, and cultural developments in the United States during the era of the Civil War.", "sem": "(BL)", "pre": "Take ENG-111", "benefit": "Builds analytical and critical thinking skills through examining major historical conflicts. Helps students understand political division and social change - valuable for law, education, and civic engagement.", "disc": "History"}, {"code": "HIS-236", "title": "North Carolina History", "desc": "This course is a study of geographical, political, economic, and social conditions existing in North Carolina from America's discovery to the present. Topics include native and immigrant backgrounds; colonial, antebellum, and Reconstruction periods; party politics; race relations; and the transition from an agrarian to an industrial economy. Upon completion, students should be able to analyze significant political, socioeconomic, and cultural developments in North Carolina.", "sem": "(BL)", "pre": "Take ENG-111", "benefit": "Connects students to local and state history, strengthening civic awareness and community engagement. Ideal for future educators, public service workers, and students interested in regional development.", "disc": "History"}, {"code": "PSY-215", "title": "Positive Psychology", "desc": "This course is an overview of the scientific study of human strengths. Topics include resilience, optimism, vital engagement (flow), positive relationships, creativity, wisdom, happiness, empathy, emotional intelligence, and other relevant topics. Upon completion, students should be able to demonstrate an understanding of the psychological factors relevant to enhancing well being.", "sem": "FA, SP (BL)", "pre": "Take PSY-150", "benefit": "Promotes personal well-being, resilience, and emotional intelligence. Helps students develop skills for success in school, careers, and relationships.", "disc": "Psychology"}, {"code": "PSY-211", "title": "Psychology of Adjustment", "desc": "This course introduces the study of the adjustment process focusing on contemporary challenges individuals must deal with in everyday life. Topics include theories of behavior, career choices, self-understanding, coping mechanisms, human relationships, intimacy, sociocultural factors influencing healthy personal adjustment, and other related topics. Upon completion, students should be able to demonstrate an awareness of the processes of adjustment.", "sem": "FA, SU, SP (IN)", "pre": "Take PSY-150", "benefit": "Teaches coping strategies, stress management, and self-awareness. Supports student success in college by improving decision-making, relationships, and mental wellness.", "disc": "Psychology"}, {"code": "PSY-231", "title": "Forensic Psychology", "desc": "This course introduces students to concepts which unite psychology and the legal system. Topics include defining competency, insanity, involuntary commitment, as well as introducing forensic assessment techniques, such as interviewing process, specialized assessments, and collecting collateral information. Upon completion, students should be able to demonstrate knowledge in areas of forensic psychology: risk assessment, criminal competencies, insanity, psychopathology, and mentally disordered offenders.", "sem": "FA, SP (IN)", "pre": "Take PSY-150", "benefit": "Introduces the intersection of psychology and the legal system. Great for students interested in criminal justice, law, psychology, and investigative careers.", "disc": "Psychology"}, {"code": "PSY-237", "title": "Social Psychology", "desc": "This course introduces the study of individual behavior within social contexts. Topics include affiliation, attitude formation and change, conformity, altruism, aggression, attribution, interpersonal attraction, and group behavior. Upon completion, students should be able to demonstrate an understanding of the basic principles of social influences on behavior.", "sem": "FA, SP (IN)", "pre": "Take PSY-150 or SOC-210", "benefit": "Explores how people influence one another. Builds skills in communication, teamwork, and understanding behavior - useful in business, education, and leadership roles.", "disc": "Psychology"}, {"code": "PSY-239", "title": "Psychology of Personality", "desc": "This course covers major personality theories and personality research methods. Topics include psychoanalytic, behavioristic, social learning, cognitive, humanistic, and trait theories including supporting research. Upon completion, students should be able to compare and contrast traditional and contemporary approaches to the understanding of individual differences in human behavior.", "sem": "FA, SU, SP (IN)", "pre": "Take PSY-150", "benefit": "Helps students understand individual differences and behavior patterns. Useful for careers in counseling, education, human resources, and management.", "disc": "Psychology"}, {"code": "PSY-241", "title": "Developmental Psych", "desc": "This course is a study of human growth and development. Emphasis is placed on major theories and perspectives as they relate to the physical, cognitive, and psychosocial aspects of development from conception to death. Upon completion, students should be able to demonstrate knowledge of development across the life span.", "sem": "FA, SU, SP (BL, IN, HF)", "pre": "Take PSY-150", "benefit": "Provides insight into human growth across the lifespan. Essential for students pursuing education, healthcare, psychology, and social work.", "disc": "Psychology"}, {"code": "PSY-246", "title": "Adolescent Psychology", "desc": "This course provides an overview of the behavior patterns, life changes, and social issues that accompany the developmental stage of adolescence. Topics include developmental theories; physical, cognitive and psychosocial growth; transitions to young adulthood; and sociocultural factors that influence adolescent roles in home, school and community. Upon completion, students should be able to identify typical and atypical adolescent behavior patterns as well as appropriate strategies for interacting with adolescents.", "sem": "SP (IN)", "pre": "Take PSY-150", "benefit": "Focuses on teenage development and challenges. Especially valuable for future teachers, counselors, coaches, and youth-focused careers.", "disc": "Psychology"}, {"code": "PSY-249", "title": "Psychology of Aging", "desc": "This course covers the particular needs and behaviors of the maturing adult. Emphasis is placed on psychosocial processes; biological and intellectual aspects of aging; adjustments to retirement, dying, bereavement; and the stereotypes and misconceptions concerning the elderly. Upon completion, students should be able to show an understanding of the psychological factors related to the aging process.", "sem": "FA (IN)", "pre": "None listed", "benefit": "Builds understanding of aging populations and life transitions. Important for healthcare, social work, counseling, and family support careers.", "disc": "Psychology"}, {"code": "PSY-259", "title": "Human Sexuality", "desc": "This course provides the biological, psychological, and sociocultural aspects of human sexuality and related research. Topics include reproductive biology, sexual and psychosexual development, sexual orientation, contraception, sexually transmitted diseases, sexual disorders, theories of sexuality, and related issues. Upon completion, students should be able to demonstrate an overall knowledge and understanding of human sexuality.", "sem": "FA, SP (IN)", "pre": "Take PSY-150", "benefit": "Promotes informed, healthy decision-making and understanding of human relationships. Supports careers in healthcare, education, counseling, and social services.", "disc": "Psychology"}, {"code": "PSY-265", "title": "Behavioral Modification", "desc": "This course is an applied study of factors influencing human behavior and strategies for behavioral change. Emphasis is placed on cognitive-behavioral theory, behavioral assessment, practical applications of conditioning techniques, and maintenance of adaptive behavior patterns. Upon completion, students should be able to implement basic learning principles to effect behavioral changes in self and others.", "sem": "SP (HF)", "pre": "Take PSY-150", "benefit": "Teaches practical behavior-change strategies. Useful for education, therapy, coaching, parenting, and leadership roles.", "disc": "Psychology"}, {"code": "PSY-275", "title": "Health Psychology", "desc": "This course covers the biopsychosocial dynamics of stress and the maintenance of good health. Topics include enhancing health and well-being, stress management, lifestyle choices and attitudes, the mind-body relationship, nutrition, exercise, and fitness. Upon completion, students should be able to demonstrate an understanding of the psychological factors related to health and well-being.", "sem": "(IN, BL)", "pre": "Take PSY-150", "benefit": "Connects mental and physical health. Helps students develop healthy habits and prepares them for healthcare and wellness-related careers.", "disc": "Psychology"}, {"code": "PSY-281", "title": "Abnormal Psychology", "desc": "This course provides an examination of the various psychological disorders, as well as theoretical, clinical, and experimental perspectives of the study of psychopathology. Emphasis is placed on terminology, classification, etiology, assessment, and treatment of the major disorders. Upon completion, students should be able to distinguish between normal and abnormal behavior patterns as well as demonstrate knowledge of etiology, symptoms, and therapeutic techniques.", "sem": "FA, SU, SP (BL, IN)", "pre": "Take PSY-150", "benefit": "Provides insight into mental health disorders and treatment. Strong foundation for psychology, counseling, nursing, and social work careers.", "disc": "Psychology"}, {"code": "SOC-213", "title": "Sociology of the Family", "desc": "This course covers the institution of the family and other intimate relationships. Emphasis is placed on mate selection, gender roles, sexuality, communication, power and conflict, parenthood, diverse lifestyles, divorce and remarriage, and economic issues. Upon completion, students should be able to analyze the family as a social institution and the social forces which influence its development and change.", "sem": "FA, SU, SP (BL, IN)", "pre": "None listed", "benefit": "Explores family dynamics and relationships. Helps students understand real-life social issues - valuable for education, counseling, and social services.", "disc": "Sociology"}, {"code": "SOC-220", "title": "Social Problems", "desc": "This course provides an in-depth study of current social problems. Emphasis is placed on causes, consequences, and possible solutions to problems associated with families, schools, workplaces, communities, and the environment. Upon completion, students should be able to recognize, define, analyze, and propose solutions to these problems.", "sem": "FA (IN)", "pre": "None listed", "benefit": "Develops critical thinking about real-world issues and solutions. Prepares students for careers in public policy, social work, law, and community leadership.", "disc": "Sociology"}, {"code": "SOC-225", "title": "Social Diversity", "desc": "This course provides a comparison of diverse roles, interests, opportunities, contributions, and experiences in social life. Topics include race, ethnicity, gender, sexual orientation, class, and religion. Upon completion, students should be able to analyze how cultural and ethnic differences evolve and how they affect personality development, values, and tolerance.", "sem": "FA, SU, SP (IN, BL, HF)", "pre": "None listed", "benefit": "Builds cultural competence and understanding of inequality. Essential for working in diverse environments and careers in education, business, and public service.", "disc": "Sociology"}, {"code": "SOC-230", "title": "Race and Ethnic Relations", "desc": "This course includes an examination of the various aspects of race and ethnicity and how these lead to different experiences, opportunities, problems, and contributions. Topics include prejudice, discrimination, perceptions, myths, stereotypes, and intergroup relationships. Upon completion, students should be able to identify and analyze relationships among racial and ethnic groups within the larger society.", "sem": "SU (IN)", "pre": "None listed", "benefit": "Examines systemic inequality and social relationships. Prepares students for advocacy, law, education, and leadership in diverse communities.", "disc": "Sociology"}, {"code": "SOC-234", "title": "Sociology of Gender", "desc": "This course examines contemporary roles in society with special emphasis on recent changes. Topics include sex role socialization, myths and stereotypes, gender issues related to family, work, and power. Upon completion, students should be able to analyze modern relationships between men and women.", "sem": "FA (IN)", "pre": "None listed", "benefit": "Explores gender roles and social change. Builds awareness and critical thinking useful in education, HR, social work, and leadership roles.", "disc": "Sociology"}, {"code": "SOC-240", "title": "Social Psychology", "desc": "This course examines the influence of culture and social groups on individual behavior and personality. Emphasis is placed on the process of socialization, communication, conformity, deviance, interpersonal attraction, intimacy, race and ethnicity, small group experiences, and social movements. Upon completion, students should be able to identify and analyze cultural and social forces that influence the individual in a society.", "sem": "SP (IN)", "pre": "None listed", "benefit": "Examines how society shapes individual behavior. Strengthens interpersonal skills and understanding of group dynamics - useful across all careers.", "disc": "Sociology"}, {"code": "SOC-242", "title": "Sociology of Deviance", "desc": "This course provides an overview of deviant behavior and the processes involved in its definition, causation, prevention, control, and treatment. Topics include theories of causation, social control, delinquency, victimization, criminality, the criminal justice system, punishment, rehabilitation, and restitution. Upon completion, students should be able to identify and analyze issues surrounding the nature and development of social responses to deviance.", "sem": "(IN, BL)", "pre": "None listed", "benefit": "Analyzes crime, deviance, and social control. Ideal for students interested in criminal justice, law, corrections, and social services.", "disc": "Sociology"}, {"code": "SOC-245", "title": "Drugs and Society", "desc": "This course covers the impact of drugs on society and human behavior. Emphasis is placed on the construction of a modern social problem from contrasting historical responses to mind-altering substances. Upon completion, students should be able to apply sociological analysis in evaluating drug use as a societal and interpersonal problem.", "sem": "SP (BL, IN)", "pre": "Take SOC-210", "benefit": "Examines substance use from a social perspective. Builds awareness of public health issues and prepares students for healthcare, counseling, and policy careers. Provides students with a well-rounded view of drugs and society so they can make smart, well-informed decisions regarding drug use. Great class for all teenagers and young adults as well as future careers in law, medicine, counseling, politics, and education.", "disc": "Sociology"}];
+const grid = document.getElementById('grid');
+const searchEl = document.getElementById('search');
+const discEl = document.getElementById('discipline');
+const formatEl = document.getElementById('format');
+const emptyEl = document.getElementById('empty');
+const stats = document.getElementById('stats');
+const overlay = document.getElementById('overlay');
+const ids = ['modalTitle','modalSub','modalSem','modalPre','modalDisc','modalDesc','modalBenefit'].reduce((o,id)=>{o[id]=document.getElementById(id);return o;},{});
+function formatClass(d){return d==='History'?'hist':d==='Psychology'?'psy':d==='Sociology'?'soc':'';}
+function render(){
+  const q = searchEl.value.trim().toLowerCase();
+  const d = discEl.value;
+  const f = formatEl.value;
+  const filtered = courses.filter(c => {
+    const hay = (c.code+' '+c.title+' '+c.desc+' '+c.benefit+' '+c.pre+' '+c.sem).toLowerCase();
+    return (d==='All' || c.disc===d) && (f==='All' || c.sem.includes(f)) && (!q || hay.includes(q));
+  });
+  grid.innerHTML = '';
+  stats.innerHTML = `<span class="pill"><strong>${filtered.length}</strong> course(s) shown</span><span class="pill">${[...new Set(filtered.map(c=>c.disc))].join(' • ') || 'No disciplines selected'}</span>`;
+  emptyEl.hidden = filtered.length !== 0;
+  filtered.forEach(c => {
+    const card = document.createElement('button');
+    card.className = `card ${formatClass(c.disc)}`;
+    card.type = 'button';
+    const teaser = c.benefit.length > 148 ? c.benefit.slice(0,145) + '...' : c.benefit;
+    card.innerHTML = `
+      <span class="badge">${c.code}</span>
+      <div class="title">${c.title}</div>
+      <div class="meta"><strong>${c.disc}</strong><br>${c.sem}<br>${c.pre}</div>
+      <div class="tease">${teaser}</div>`;
+    card.addEventListener('click',()=>openModal(c));
+    grid.appendChild(card);
+  });
 }
+function openModal(c){
+  ids.modalTitle.textContent = `${c.code} - ${c.title}`;
+  ids.modalSub.textContent = 'Course detail view';
+  ids.modalSem.textContent = c.sem;
+  ids.modalPre.textContent = c.pre;
+  ids.modalDisc.textContent = c.disc;
+  ids.modalDesc.textContent = c.desc;
+  ids.modalBenefit.textContent = c.benefit;
+  overlay.style.display='flex';
+  overlay.setAttribute('aria-hidden','false');
+}
+function closeModal(){overlay.style.display='none'; overlay.setAttribute('aria-hidden','true');}
+searchEl.addEventListener('input',render);
+discEl.addEventListener('change',render);
+formatEl.addEventListener('change',render);
+document.getElementById('reset').addEventListener('click',()=>{searchEl.value='';discEl.value='All';formatEl.value='All';render();});
+document.getElementById('closeBtn').addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay) closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+render();
 </script>
-
 </body>
 </html>
